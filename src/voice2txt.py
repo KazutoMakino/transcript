@@ -1,4 +1,4 @@
-"""音声ファイルを読み込み文字起こしを行う
+"""音声／動画ファイルを読み込み文字起こしを行う
 """
 
 import csv
@@ -37,7 +37,7 @@ def main():
 
     print()
     print(f"モデル名： {model_name}")
-    print(f"音声ファイルのパス： {file_path}")
+    print(f"音声／動画ファイルのパス： {file_path}")
 
     # openai-whisper は 30 秒ごとのデータに対して演算を行うため，30 秒間のデータ長さを取得する
     sampling_rate = librosa.get_samplerate(path=file_path)
@@ -127,7 +127,7 @@ class CsvLogger(object):
         30 [s] ごとに変換された文字列のログを取るためのロガー．
 
         Args:
-            file_path (str): 音声ファイルのパス．
+            file_path (str): 音声／動画ファイルのパス．
             model_name (str): モデル名称．
             log_dir (Path): ログ保存先．
         """
@@ -181,7 +181,7 @@ class ResultWriter(object):
         """ログ保存された .csv ファイルから文字起こしされた出力の .txt ファイルを生成する．
 
         Args:
-            file_path (str): 音声ファイルパス．
+            file_path (str): 音声／動画ファイルパス．
             model_name (str): モデル名称．
             log_dir (Path): ログ保存先．
             output_dir (Path): 文字起こしされた .txt ファイルの出力先．
@@ -206,15 +206,17 @@ class ResultWriter(object):
 
 
 def get_file_path_on_explorer() -> str:
-    """エクスプローラーから音声ファイルを選択する．
+    """エクスプローラーから音声／動画ファイルを選択する．
 
     Returns:
-        str: 音声ファイルのパス
+        str: 音声／動画ファイルのパス
     """
-    filetypes = [("音声ファイル", "*.mp3 *.m4a *.wave *.aif *.aac *.flac")]
+    filetypes = [
+        ("音声／動画ファイル", "*.mp3 *.m4a *.wave *.aif *.aac *.flac *.mp4 *.avi *.webm *.flv")
+    ]
     initial_dir = "../data/input"
     file_path = filedialog.askopenfilename(
-        filetypes=filetypes, initialdir=initial_dir, title="音声ファイルを選択してください"
+        filetypes=filetypes, initialdir=initial_dir, title="音声／動画ファイルを選択してください"
     )
     if file_path:
         return file_path
@@ -269,8 +271,8 @@ def get_model_name_file_path_from_gui(
     layout += [[sg.Text(text="", font=("BIZ UD Gothic", 14))]]
     layout += [
         [
-            sg.Text(text="右のボタンを押して音声ファイルを選んでください： ", font=("BIZ UD Gothic", 14)),
-            sg.Button(button_text="音声ファイルを選択", font=("BIZ UD Gothic", 14)),
+            sg.Text(text="右のボタンを押して音声／動画ファイルを選んでください： ", font=("BIZ UD Gothic", 14)),
+            sg.Button(button_text="音声／動画ファイルを選択", font=("BIZ UD Gothic", 14)),
         ],
         [
             sg.Text(
@@ -296,7 +298,7 @@ def get_model_name_file_path_from_gui(
             window.close()
             exit()
 
-        elif event == "音声ファイルを選択":
+        elif event == "音声／動画ファイルを選択":
             file_path: str = get_file_path_on_explorer()
             window["file_path"].Update(file_path)
 
@@ -332,7 +334,7 @@ def voice_to_txt(
         model (whisper.model.Whisper): モデル．
         audio (np.ndarray): 音声データ．
         sampling_rate (float): サンプリングレート．
-        file_path (str): 入力となる音声ファイルのパス．
+        file_path (str): 入力となる音声／動画ファイルのパス．
         model_name (str): モデル名称．
         log_dir (Path): ログ保存先．
     """

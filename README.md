@@ -1,19 +1,12 @@
-# 音声ファイルを読み込んで文字起こしを行うツール
-
-TODO:
-
-- `web サイト` のリンクを更新
-- 使用方法の画像を ubuntu バージョンにする
-- 動画ファイルも対応できることを記載する／ソースコードをデバッグする
-- 最後に github を public にして，README.md の `TODO` を削除する
+# 音声／動画ファイルを読み込んで文字起こしを行うツール
 
 ## 概要
 
-[openai whisper](https://github.com/openai/whisper) を用いて，音声ファイルを読み込んで文字起こしを行うツールです．  
-[PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) を用いて作成した GUI によって，AI モデルと文字起こししたい音声ファイルを選択することにより，文字起こしが可能です．  
-会議議事録作成の雛形や，音声データを文字列で残しておきたい時にご使用ください（ただし，完璧に文字起こしされない場合があり，求めていた検索結果が文字列完全一致検索では得られないかもしれませんので，ご了承ください）．
-また，例えば社内の AI やプログラミングなどに疎い人も使用できるように，python emendable package を用いた展開用パッケージ作成については，こちらの [web サイト](????????????????????) にて説明していますので，ご興味あればご覧ください．
-Python emendable package を使用する場合は環境構築が不要で，`./src/voice2txt.bat` を実行するだけで上記ツールが起動できるようにしています．
+[openai whisper](https://github.com/openai/whisper) を用いて，音声／動画ファイルを読み込んで文字起こしを行うツールです．  
+[PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) を用いて作成した GUI によって，AI モデルと文字起こししたい音声／動画ファイルを選択することにより，文字起こしが可能です．  
+会議議事録作成の雛形や，音声／動画データを文字列で残しておきたい時にご使用ください（ただし，完璧に文字起こしされない場合があり，求めていた検索結果が文字列完全一致検索では得られないかもしれませんので，ご了承ください）．
+また，例えば社内の AI やプログラミングなどに疎い人も使用できるように，python embeddable package を用いた展開用パッケージ作成については，こちらの [web サイト](https://slash-z.com/embeddable-python-whisper) にて説明していますので，ご興味あればご覧ください．
+Python embeddable package を使用する場合は環境構築が不要で，`./src/voice2txt.bat` を実行するだけで上記ツールが起動できるようにしています．
 
 ## 使用想定環境
 
@@ -43,14 +36,14 @@ poetry install
    ![./assets/wsl-01_boot-up.png](./assets/wsl-01_boot-up.png)
 4. プルダウンメニューからモデルを選択します．  
    ![./assets/wsl-02_pull-down-menu.png](./assets/wsl-02_pull-down-menu.png)
-5. 「音声ファイルを選択」 のボタンを押すとエクスプローラーが立ち上がるので，変換したいファイルを選択します．  
+5. 「音声／動画ファイルを選択」 のボタンを押すとエクスプローラーが立ち上がるので，変換したいファイルを選択します．  
    エクスプローラーでファイルを選択したら，そのファイルをダブルクリックするか，もしくは開くボタンでファイルを開きます．
    ![./assets/wsl-03_explorer.png](./assets/wsl-03_explorer.png)
 6. GUI に選択内容が反映されますので，内容が良ければ OK ボタンで文字起こしがスタートします．  
    ![./assets/wsl-04_selected.png](./assets/wsl-04_selected.png)
 7. 変換処理が終われば起動しているシェルは不要なので，「続行するには何かキーを押してください．．．」と入力待ちになっているため何かキーを押すか，右上の ☓ でウィンドウを閉じてください．  
    ![./assets/wsl-05_complete.png](./assets/wsl-05_complete.png)
-8. 変換後のファイルは，`{音声ファイル名}_{モデル名}.txt` としています．  
+8. 変換後のファイルは，`{音声／動画ファイル名}_{モデル名}.txt` としています．  
    `small` と `medium` の出力結果について比較すると，`small` もかなり精度良く文字起こしができていますが，`medium` では句読点も追加されていて，より一層読みやすく変換されていることが示されています．  
    ![./assets/wsl-07_small-medium.png](./assets/wsl-07_small-medium.png)
 

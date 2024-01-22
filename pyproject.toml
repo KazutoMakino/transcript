@@ -22,7 +22,7 @@ black = "^23.7.0"
 autopep8 = "^2.0.2"
 pyproject-flake8 = "^6.0.0.post1"
 isort = "^5.12.0"
-jupyterlab = "^4.0.3"
+jupyterlab = "^4.0.11"
 
 [tool.black]
 line-length = 88

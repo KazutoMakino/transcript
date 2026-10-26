@@ -1,40 +1,27 @@
-[tool.poetry]
+[project]
 name = "transcript"
 version = "0.1.0"
-description = ""
-authors = ["https://github.com/KazutoMakino/transcript"]
+description = "Add your description here"
 readme = "README.md"
-packages = [{include = "src"}]
+authors = [
+    { name = "KazutoMakino", email = "55287424+KazutoMakino@users.noreply.github.com" }
+]
+requires-python = ">=3.14.9"
+dependencies = [
+    "librosa>=1.0.0",
+    "numpy>=2.5.4",
+    "pydantic>=2.14.1",
+    "pysimplegui>=6.3.0.1",
+    "pytz>=2026.5",
+    "torch>=2.14.1",
+    "tqdm>=4.70.1",
+    "uv>=0.13.5",
+    "whisper>=1.1.10",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-openai-whisper = "^20230314"
-torch = ">=2.0.0, !=2.0.1"
-tqdm = "^4.65.0"
-librosa = "^0.10.0.post2"
-pydantic = "^2.0.3"
-pysimplegui = "^4.60.5"
-pytz = "^2023.3"
-
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.7.0"
-autopep8 = "^2.0.2"
-pyproject-flake8 = "^6.0.0.post1"
-isort = "^5.12.0"
-jupyterlab = "^4.0.11"
-
-[tool.black]
-line-length = 88
-
-[tool.isort]
-profile = "black"
-
-[tool.flake8]
-max-line-length = 119
-extend-ignore = "E203"
-exclude = ".venv"
+[project.scripts]
+transcript = "transcript:main"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
